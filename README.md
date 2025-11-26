@@ -10,9 +10,10 @@ The official documentation is often in Chinese and relies on advanced tools. Thi
 
 For immediate connection and development, here is a visual reference of the Ai-WB2-32S module pinout. Note the location of key pins like **VCC (3V3)**, **GND**, and the **Boot/Download Pin (GPIO8)** needed for flashing.
 
+<img width="800" height="800" alt="image" src="https://github.com/user-attachments/assets/4fa6a1a4-cc4b-4598-b834-d3ec3d1620bf" />
 
 
-http://googleusercontent.com/image_collection/image_retrieval/15434833257390516288
+
 
 
 *(For a detailed table of peripherals, see `docs/Hardware_Reference.md`)*
