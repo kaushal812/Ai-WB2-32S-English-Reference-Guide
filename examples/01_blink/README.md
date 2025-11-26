@@ -2,14 +2,9 @@
 
 This is the standard "Hello World" example for embedded systems, adapted for the **BL602 Ai-WB2-32S** using the **BL\_IOT\_SDK** and **FreeRTOS**.
 
-It demonstrates the fundamental use of:
-* **GPIO:** Controlling output pins.
-* **`bl_gpio.h`:** The specific API for controlling the Bouffalo Lab chip's GPIO.
-* **FreeRTOS:** Using the `xTaskCreate` and `vTaskDelay` functions for concurrent processing.
+**✅ SCHEMATIC VERIFICATION:** This code uses the correct on-board LED pins as verified from the kit's schematic: **GPIO 14** (Red) and **GPIO 13** (Blue).
 
 ## 1. Source Code: `main.c`
-
-This code initializes two GPIO pins and creates a FreeRTOS task to alternate their states every 100 milliseconds (0.1 seconds).
 
 ```c
 #include <stdio.h>
@@ -18,13 +13,11 @@ This code initializes two GPIO pins and creates a FreeRTOS task to alternate the
 #include <task.h>
 #include <bl_gpio.h>
 
-// IMPORTANT: Pin Definitions
-// These values MUST be updated based on your specific Ai-WB2-32S board's wiring.
-// Consult the schematic or the docs/Hardware_Reference.md.
-#define GPIO_RED_LED 14   // Default Pin 14 (Example)
-#define GPIO_BLUE_LED 3   // Default Pin 3 (Example)
+// Define GPIO pins for the LEDs (Verified via Schematic)
+// R: Red, B: Blue, G: Green
+#define GPIO_RED_LED 14   
+#define GPIO_BLUE_LED 13  // Correct pin for the Blue LED on the Ai-WB2-32S-Kit
 
-// Task: Alternates the state of the two defined LEDs
 void blink_alternating(void *param)
 {
     // red_value = 1 (ON), blue_value = 0 (OFF) on start
@@ -58,7 +51,6 @@ void main(void)
     bl_gpio_enable_output(GPIO_RED_LED, 0, 0);
     bl_gpio_enable_output(GPIO_BLUE_LED, 0, 0);
 
-    // Create the FreeRTOS task:
-    // Arguments: Function, Name, Stack Size, Parameters, Priority, Handle
+    // Create the FreeRTOS task
     xTaskCreate(blink_alternating, "blink_alternating", 1024, NULL, 15, NULL);
 }
