@@ -54,3 +54,25 @@ void main(void)
     // Create the FreeRTOS task
     xTaskCreate(blink_alternating, "blink_alternating", 1024, NULL, 15, NULL);
 }
+```
+## 2. Compiling and Flashing
+Preparation: Ensure you have completed the steps in docs/Setup_Toolchain.md and docs/Setup_Eclipse_CDT.md.
+
+Configuration: In your Eclipse project properties, ensure the Build Directory is pointing to the root of this 01_blink example folder.
+
+Build: Click the Hammer icon in Eclipse. This will generate the blink.bin file.
+
+Flash: Follow the instructions in docs/Flashing_Guide.md to put the board into Programming Mode and upload the blink.bin using BLDevCube or the make flash command.
+
+## 3. Expected Serial Output
+Connect to the board's UART port using a serial terminal (115200 baud). After flashing and resetting the board, you should see the standard boot log followed by the LED state updates:
+
+... [System Initialization Logs] ...
+
+Red LED: ON, Blue LED: OFF
+
+Red LED: OFF, Blue LED: ON
+
+Red LED: ON, Blue LED: OFF
+
+... (continues alternating)
