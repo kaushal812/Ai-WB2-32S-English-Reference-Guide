@@ -10,10 +10,7 @@ The official documentation is often in Chinese and relies on advanced tools. Thi
 
 For immediate connection and development, here is a visual reference of the Ai-WB2-32S module pinout. Note the location of key pins like **VCC (3V3)**, **GND**, and the **Boot/Download Pin (GPIO8)** needed for flashing.
 
-<img width="800" height="800" alt="image" src="https://github.com/user-attachments/assets/4fa6a1a4-cc4b-4598-b834-d3ec3d1620bf" />
-
-
-
+<img width="1228" height="664" alt="image" src="https://github.com/user-attachments/assets/f6b26080-1197-4fd0-a0fd-9c7e3085dcef" />
 
 
 *(For a detailed table of peripherals, see `docs/Hardware_Reference.md`)*
@@ -43,6 +40,6 @@ Ready to get started? Here are the three main steps to flash your first program:
 | :--- | :--- | :--- |
 | `docs/Hardware_Reference.md` | Detailed pinout, LED/Button mapping, and power specifications. | **Hardware/Pinout** |
 | `docs/Setup_Toolchain.md` | Step-by-step instructions for installing the RISC-V compiler, CMake, and the SDK. | **Prerequisites** |
-| `docs/Setup_Eclipse_CDT.md` | How to configure Eclipse CDT for the BL602's CMake-based build system. | **IDE Setup** |
-| `docs/Flashing_Guide.md` | The exact procedure for using the official **BLDevCube** utility and putting the board into programming mode. | **Deployment** |
-| `examples/01_blink/` | The "Hello World" of embedded systems. | **Code Example** |
+| `docs/Setup_Eclipse_CDT.md` | How to configure Eclipse CDT for the BL602's CMake/Makefile-based build system. | **IDE Setup** |
+| `docs/Flashing_Guide.md` | The exact procedure for using the official **BLDevCube** utility and the video-verified flash sequence. | **Deployment** |
+| `examples/01_blink/README.md` | The first working example code (with verified pins). | **Code Example** |
