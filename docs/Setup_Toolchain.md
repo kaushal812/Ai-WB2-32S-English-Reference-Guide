@@ -1,40 +1,43 @@
-# 🛠️ Toolchain and SDK Installation
+# 🛠️ Toolchain and SDK Installation (Video Verified Steps)
 
-This document details the required software prerequisites for developing on the BL602 chip.
+This document details the required software prerequisites for developing on the BL602 chip, following the widely-accepted community tutorial workflow.
 
-## 1. RISC-V GNU Toolchain
+## 1. MSYS2: The Build Environment
 
-The BL602 is a RISC-V architecture, requiring a specific cross-compiler.
+The BL602 SDK relies on Linux-like tools. We use **MSYS2** to provide the `make` utility and a proper shell environment.
 
-1.  **Download:** Download the latest stable version of the **`riscv64-unknown-elf-gcc`** toolchain.
-    * *(Tip: Search for "Bouffalo Lab toolchain" or use a reputable source like the SiFive/RISC-V official distribution.)*
-2.  **Installation Path:** Install the toolchain to a short, simple path **without spaces** (e.g., `C:\riscv` on Windows).
-3.  **PATH Variable:** **Crucially**, add the `bin` directory of your toolchain (e.g., `C:\riscv\riscv64-unknown-elf-gcc-xxx\bin`) to your operating system's **PATH environment variable**.
-    * *Verification: Open a new terminal and run `riscv64-unknown-elf-gcc -v`. If it returns version information, the setup is correct.*
+1.  **Download & Install MSYS2:** Go to [msys2.org](https://www.msys2.org/) and download the installer. Use the default installation path (usually `C:\msys64`).
+2.  **Install the Build Tool (`make`):** After installation, launch the **MSYS2 MinGW 64-bit** terminal and run the following command:
+    ```bash
+    pacman -S make
+    ```
+    *When prompted, type 'y' and press Enter to confirm the installation.*
 
-## 2. Build and Utility Tools
+## 2. Environment Variables (Critical)
 
-| Tool | Purpose | Installation Notes |
-| :--- | :--- | :--- |
-| **CMake** | The SDK uses CMake to manage the build files. | Download and install from the official site. **Ensure it is added to your PATH.** |
-| **Git** | Used to clone the SDK and manage project versions. | Download and install Git. |
-| **BLDevCube** | The official, proprietary GUI flashing utility. | Download the latest version of **Bouffalo Lab Dev Cube** for reliable firmware uploading. |
-| **Serial Driver** | For the USB-to-UART converter (often CH340 or CP210x). | Install the appropriate driver for your board's serial chip if needed. |
+These variables tell the system and Eclipse where to find the tools.
 
-## 3. Clone the SDK
+1.  **Open System Environment Variables** (Windows Key + R, type `control panel`, search for `env`).
+2.  Under **User variables**, click **New...**
+    * **Variable name:** `MSYS2_PATH_TYPE` (must be all uppercase)
+    * **Variable value:** `inherit` (must be all lowercase)
+3.  Under **System variables**, find and select the **Path** variable, then click **Edit...**
+4.  Add the path to the MSYS2 binaries:
+    * **Path:** `C:\msys64\usr\bin` (or your installation's equivalent)
 
-The official SDK contains the necessary headers, libraries, and build scripts.
+## 3. RISC-V GNU Toolchain
 
-1.  Navigate to your chosen development directory.
-2.  Clone the Bouffalo Lab SDK (or a stable community fork):
+This is the cross-compiler for the chip. This toolchain should come as part of the SDK structure.
+
+1.  **SDK Clone:** Clone the SDK structure, which contains the toolchain folder:
     ```bash
     git clone --recursive [https://github.com/bouffalolab/bl_iot_sdk](https://github.com/bouffalolab/bl_iot_sdk)
     ```
-3.  Change into the SDK directory:
-    ```bash
-    cd BL_IOT_SDK
-    ```
+2.  **Flashing Tool:** Download the official **Bouffalo Lab Dev Cube** for easy firmware uploading (recommended).
 
----
+## 4. Serial Monitor (Termite)
 
-**Next Step:** Once all prerequisites are installed, we can configure Eclipse to recognize them in `docs/Setup_Eclipse_CDT.md`.
+We use a simple serial program like **Termite** to view the chip's output (debugging logs).
+
+1.  **Download and Install:** Download **Termite** (or any preferred terminal emulator).
+2.  **Configuration:** Once your board is plugged in, determine its **COM port** in **Device Manager**. In Termite, set the port and set the **Baud Rate to 115200** (a standard debugging speed for the BL602).
